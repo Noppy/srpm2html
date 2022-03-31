@@ -51,9 +51,13 @@
     seuser: "system_u"
     setype: "httpd_sys_content_t"
   with_items:
+    - "{{ www_dir      }}"
+    - "{{ tools_dir    }}"
+    - "{{ kernel_dir   }}"
+    - "{{ bin_dir      }}"
     - "{{ rpmbuild_dir }}"
     - "{{ squashfs_dir }}"
-    - "{{ source_dir }}"
+    - "{{ source_dir   }}"
 
 - name: set shell 
   get_url:
@@ -65,10 +69,3 @@
     seuser: "system_u"
     setype: "httpd_sys_content_t"
   with_items: '{{srpm2html_shells}}'
-
-- name: add apache group at ec2-user( Only Amazon Linux )
-  user:
-    name:   ec2-user
-    groups: ec2-user
-    append: yes
-  when: "ansible_distribution == 'Amazon'"
