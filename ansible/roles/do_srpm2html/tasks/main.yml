@@ -5,4 +5,5 @@
 - name: setup srpm2html shell script tools
   include: setup_srpm2html_tool.yml
   tags:
-    - setup_srpm2html
+    - format_disk_and_create_dirs
+    #- setup_srpm2html

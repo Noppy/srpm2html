@@ -67,8 +67,8 @@ cd srpm2html/ansible
 ### Run Ansible play-book
 ```shell
 #In the case of Nitro instances(ex. m5,c5...)
-EbsDevName="/dev/nvme2"
-PartitionDevName="/dev/nvme2n1"
+EbsDevName="/dev/vme1n1"
+PartitionDevName="/dev/vme1n1p1"
 #In the case of Xen instances(ex. m4,c4...)
 EbsDevName="/dev/xvdb"
 PartitionDevName="/dev/xvdb1"
