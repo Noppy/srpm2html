@@ -45,8 +45,8 @@
   file:
     path:  "{{ item }}"
     state: directory
-    owner: apache
-    group: apache
+    owner: ec2-user
+    group: ec2-user
     mode:  0775
     seuser: "system_u"
     setype: "httpd_sys_content_t"
@@ -69,7 +69,7 @@
 - name: add apache group at ec2-user( Only Amazon Linux )
   user:
     name:   ec2-user
-    groups:  apache
+    groups: ec2-user
     append: yes
   when: "ansible_distribution == 'Amazon'"
 
@@ -77,8 +77,8 @@
   file:
     path:  "{{ item }}"
     state: directory
-    owner: apache
-    group: apache
+    owner: ec2-user
+    group: ec2-user
     mode:  0775
     seuser: "system_u"
     setype: "httpd_sys_content_t"
