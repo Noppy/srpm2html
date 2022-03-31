@@ -6,7 +6,6 @@
   dnf:
     name:  "{{ item }}"
     state: "latest"
-  notify:  "restart httpd"
   when:    "ansible_pkg_mgr == 'dnf'"
   with_items:
     - gcc
@@ -22,7 +21,6 @@
   yum:
     name:  "{{ item }}"
     state: "latest"
-  notify:  "restart httpd"
   when:    "ansible_pkg_mgr == 'yum'"
   with_items:
     - gcc 

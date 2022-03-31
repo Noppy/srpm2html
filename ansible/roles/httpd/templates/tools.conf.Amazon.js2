@@ -1,8 +1,0 @@
-Alias /tools {{ tools_dir }}
-<Directory "{{ tools_dir }}">
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride None
-    Order allow,deny
-    Allow from all
-    Require all granted
-</Directory>

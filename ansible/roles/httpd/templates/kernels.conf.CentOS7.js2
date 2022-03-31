@@ -1,6 +1,0 @@
-Alias /kernels {{ kernel_dir }}
-<Directory "{{ kernel_dir }}">
-    Require all granted
-    AllowOverride None
-    Options Indexes FollowSymLinks
-</Directory>
