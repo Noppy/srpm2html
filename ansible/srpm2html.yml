@@ -1,6 +1,6 @@
 ---
 
-#file: webservers.yml
+#file: srpm2html.yml
 
 - hosts: webservers
   become: yes
