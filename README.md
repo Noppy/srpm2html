@@ -51,9 +51,9 @@ $ sudo make install
 
 
 ## Set up by Ansible 
-### (1) Run EC2 instance
+### Run EC2 instance
 
-### (2) Preparation
+### Preparation
 - Install git and Ansible
 ```shell
 sudo yum -y install git
@@ -64,7 +64,7 @@ sudo amazon-linux-extras install -y ansible2
 git clone https://github.com/Noppy/srpm2html.git
 cd srpm2html/ansible
 ```
-### (3)
+### Run Ansible play-book
 ```shell
 #In the case of Nitro instances(ex. m5,c5...)
 EbsDevName="/dev/nvme2"

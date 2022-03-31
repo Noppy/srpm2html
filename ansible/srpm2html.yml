@@ -9,5 +9,5 @@
 
   roles:
     - common
-#    - httpd
+    - do_srpm2html
     
