@@ -1,0 +1,13 @@
+---
+
+#file: webservers.yml
+
+- hosts: webservers
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  roles:
+    - common
+#    - httpd
+    

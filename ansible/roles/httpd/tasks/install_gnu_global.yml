@@ -1,0 +1,33 @@
+---
+# file: /roles/httpd/tasks/install_gnu_global.yml 
+# This playbook install gnu global
+
+- name: download the Gnu Global tar file
+  get_url:
+    url:  "{{ item }}"
+    dest: "{{ source_build_dir }}"
+  with_items:
+    - "{{ gnu_global_tar_url }}"
+
+- name: extrace the tar file
+  unarchive:
+    src:  "{{ source_build_dir }}/{{ global_version }}.tar.gz"
+    dest: "{{ source_build_dir }}"
+    remote_src: True
+
+- name: configure
+  command: chdir={{ source_build_dir }}/{{ global_version }} ./configure
+
+- name: make
+  command: chdir={{ source_build_dir }}/{{ global_version }} make
+
+- name: make install
+  command: chdir={{ source_build_dir }}/{{ global_version }} make install
+  
+- name: remove a tar file and a source directory
+  file:
+    path: "{{ item }}"
+    state: "absent"
+  with_items:
+    - "{{ source_build_dir}}/{{ global_version }}"
+    - "{{ source_build_dir}}/{{ global_version }}.tar.gz"

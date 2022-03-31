@@ -1,0 +1,20 @@
+---
+# file: /roles/common/tasks/main.yml
+# This playbook deploys the common setting
+
+- name: install python2 by dnf module
+  include: install-pkg-RedHat-dnf.yml
+  when: "ansible_pkg_mgr == 'dnf'"
+  tags:
+    - install_python2
+
+- name: install python2 by yum module
+  include: install-pkg-RedHat-yum.yml
+  when: "ansible_pkg_mgr == 'yum'"
+  tags:
+    - install_python2
+
+- name: setup vim
+  include: setup-vim.yml
+  tags:
+    - setup_vim

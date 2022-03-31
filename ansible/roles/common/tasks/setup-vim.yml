@@ -1,0 +1,16 @@
+---
+# file: /roles/common/tasks/setup-vim.yml 
+# This playbook setup vim configuration.
+
+- name: copy .vimrc to the home directory.
+  copy:
+    src:   "{{ item.src }}"
+    dest:  "{{ item.dest }}"
+    owner: ec2-user
+    group: ec2-user
+    mode:  0664
+    seuser: "system_u"
+    setype: "httpd_sys_content_t"
+  when: "ansible_distribution == 'Amazon'"
+  with_items:
+    - { src:  vimrc, dest: "/home/ec2-user/.vimrc" }

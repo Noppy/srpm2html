@@ -1,0 +1,15 @@
+---
+
+# file: roles/common/tasks/install-pkg-RedHat-yum.yml
+# ansibleの前提となるパッケージのインストール
+# 前提：Redhat/Fedora系、パッケージインストール:dnf
+#
+
+- name: Bootstrap a host without python2 installed(by yum)
+  raw: yum install -y python libselinux-python python-firewall
+  tags:
+    - install-python-yum
+# comment-
+# python            :Required by ansible.
+# libselinux-python :Required, if SELinux enabled on remote nodes.
+# python-firewall   :Required by firewall module.

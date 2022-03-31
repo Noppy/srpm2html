@@ -1,0 +1,18 @@
+---
+# file: /roles/httpd/tasks/main.yml
+# This playbook deploys the apache httpd server
+
+- name: setup httpd server
+  include: setup_httpd.yml
+  tags:
+    - setup_httpd
+
+- name: customize httpd server
+  include: customize_httpd.yml
+  tags:
+    - customize_httpd
+
+- name: setup srpm2html shell script tools
+  include: setup_srpm2html_tool.yml
+  tags:
+    - setup_srpm2html

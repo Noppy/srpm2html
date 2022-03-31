@@ -1,0 +1,58 @@
+---
+# file: /roles/httpd/tasks/customize_httpd.yml
+# This playbook customizes the apache httpd server
+
+- name: create additional content directories for httpd server
+  file:
+    path:  "{{ item }}"
+    state: directory
+    owner: apache
+    group: apache
+    mode:  0775
+    seuser: "system_u"
+    setype: "httpd_sys_content_t"
+  notify: restart httpd
+  with_items:
+    - "{{ tools_dir }}"
+    - "{{ kernel_dir }}"
+    - "{{ bin_dir }}"
+
+- name: set configuration files in conf.d/ directory(over fedora24 or CentOS7 )
+  template:
+    src:   "{{ item }}.CentOS7.js2"
+    dest:  "/etc/httpd/conf.d/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode:  0644
+  notify:  restart httpd
+  when: "ansible_distribution == 'Fedora'
+         and ansible_distribution_major_version >= 24"
+  with_items:
+    - "kernels.conf"
+    - "tools.conf"
+
+- name: set configuration files in conf.d/ directory( Amazon Linux )
+  template:
+    src:   "{{ item }}.Amazon.js2"
+    dest:  "/etc/httpd/conf.d/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode:  0644
+  notify:  restart httpd
+  when: "ansible_distribution == 'Amazon'"
+  with_items:
+    - "kernels.conf"
+    - "tools.conf"
+
+- name: set httpd static contents
+  copy:
+    src:   "{{ item }}"
+    dest:  "{{ www_dir }}/{{ item }}"
+    owner: apache
+    group: apache
+    mode:  0664
+    seuser: "system_u"
+    setype: "httpd_sys_content_t"
+  with_items:
+    - "index.html"
+
