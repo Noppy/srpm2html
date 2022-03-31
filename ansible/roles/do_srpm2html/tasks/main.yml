@@ -2,13 +2,7 @@
 # file: /roles/httpd/tasks/main.yml
 # This playbook deploys the apache httpd server
 
-- name: format disk and create directories
-  include: format_disk_and_create_dirs.yml
+- name: setup srpm2html shell script tools
+  include: setup_srpm2html_tool.yml
   tags:
-    - format_disk_and_create_dirs
-
-#- name: setup srpm2html shell script tools
-#  include: setup_srpm2html_tool.yml
-#  tags:
-#    - format_disk_and_create_dirs
-#    #- setup_srpm2html
+    - setup_srpm2html

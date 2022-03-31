@@ -66,13 +66,6 @@ cd srpm2html/ansible
 ```
 ### Run Ansible play-book
 ```shell
-#In the case of Nitro instances(ex. m5,c5...)
-EbsDevName="/dev/vme1n1"
-PartitionDevName="/dev/vme1n1p1"
-#In the case of Xen instances(ex. m4,c4...)
-EbsDevName="/dev/xvdb"
-PartitionDevName="/dev/xvdb1"
-
 #Run ansible playbook
-ansible-playbook srpm2html.yml --extra-vars "EbsDevName=${EbsDevName} PartitionDevName=${PartitionDevName}" -i inventory
+ansible-playbook srpm2html.yml -i inventory
 ```

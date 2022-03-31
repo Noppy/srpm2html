@@ -73,46 +73,6 @@
     append: yes
   when: "ansible_distribution == 'Amazon'"
 
-- name: check exist {{ ebs_dev_name }}
-  stat:
-    path: "{{ ebs_dev_name }}"
-  register: ebs_dev 
-
-- name: check exist {{ partition_dev_name }}
-  stat:
-    path: "{{ partition_dev_name }}"
-  register: part_dev
-
-- name: make partition label {{ ebs_dev_name }}
-  command: "parted --script --align optimal {{ ebs_dev_name }} -- mklabel gpt"
-  when: ebs_dev.stat.exists and not part_dev.stat.exists
-
-- name: make partition {{ ebs_dev_name }}
-  command: "parted --script --align optimal {{ ebs_dev_name }} -- mkpart primary ext4 1MiB -1"
-  when: ebs_dev.stat.exists and not part_dev.stat.exists
-
-- name: check exist {{ partition_dev_name }}
-  stat:
-    path: "{{ partition_dev_name }}"
-  register: part_dev
-
-- name: format filesystem( only aws )
-  filesystem:
-    fstype: ext4
-    dev:  "{{ partition_dev_name }}"
-    opts: -L rpmbuild -i 4096
-  when: part_dev.stat.exists
-
-- name: add rpmbuild label filesystem at fstab
-  mount:
-    name:   "{{ rpmbuild_dir }}"
-    src:    "LABEL=rpmbuild"
-    fstype: ext4
-    opts:   defaults,noatime
-    passno: 2
-    state:  mounted
-  when: part_dev.stat.exists
-
 - name: change parmission and owner rpmbuild
   file:
     path:  "{{ item }}"

@@ -19,7 +19,3 @@ global_version:   "global-6.6.8"
 source_build_dir: "/tmp"
 gnu_global_tar_url: "ftp://ftp.gnu.org/pub/gnu/global/{{ global_version }}.tar.gz"
 check_global_file_path: "/usr/local/bin/htags"
-
-# EBS device name in AWS
-ebs_dev_name: "{{ EbsDevName }}"
-partition_dev_name: "{{ PartitionDevName }}"
